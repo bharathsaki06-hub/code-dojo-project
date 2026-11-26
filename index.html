@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeDojo Daily</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2 class="logo">⚡ CodeDojo</h2>
+        <p class="small-text">DAILYDEBUG DERBY</p>
+
+        <nav>
+            <button class="nav-btn active" data-page="dashboard">🏠 Dashboard</button>
+            <button class="nav-btn" data-page="challenges">🧩 Challenges</button>
+            <button class="nav-btn" data-page="workspace">💻 Workspace</button>
+            <button class="nav-btn" data-page="teams">👥 My Team</button>
+            <button class="nav-btn" data-page="leaderboard">🏆 Leaderboard</button>
+            <button class="nav-btn" data-page="streak">📅 Streak</button>
+            <button class="nav-btn" data-page="assessments">📝 Assessments</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="profile">
+                <div class="avatar">S</div>
+                <div>
+                    <strong>Student</strong>
+                    <p>Coding Explorer</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="page active">
+
+            <div class="topbar">
+                <div>
+                    <p class="small-text">CODE PRACTICE HUB</p>
+                    <h1>Welcome back, Coder! 👋</h1>
+                    <p>Ready to solve today's coding challenge?</p>
+                </div>
+
+                <button class="secondary-btn" onclick="openNotifications()">
+                    🔔 Notifications
+                </button>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <p>Problems Solved</p>
+                    <h2 id="solvedCount">12</h2>
+                    <span>Keep building</span>
+                </div>
+
+                <div class="stat-card">
+                    <p>Current Streak</p>
+                    <h2>🔥 6 Days</h2>
+                    <span>Great consistency!</span>
+                </div>
+
+                <div class="stat-card">
+                    <p>Team Points</p>
+                    <h2 id="teamPoints">850</h2>
+                    <span>Binary Beasts</span>
+                </div>
+
+                <div class="stat-card">
+                    <p>Team Rank</p>
+                    <h2 id="teamRank">#1</h2>
+                    <span>Campus leaderboard</span>
+                </div>
+            </div>
+
+            <!-- DAILY CHALLENGE -->
+            <div class="daily-card">
+                <div>
+                    <span class="tag purple">TODAY'S CHALLENGE</span>
+                    <h2>Two Sum Variant</h2>
+                    <p>Find two numbers in an array whose sum equals the target.</p>
+
+                    <div class="tags">
+                        <span class="tag green">Easy</span>
+                        <span class="tag gray">Arrays</span>
+                    </div>
+
+                    <button class="primary-btn" onclick="openDailyChallenge()">
+                        Solve Challenge →
+                    </button>
+                </div>
+
+                <div class="challenge-icon">🧠</div>
+            </div>
+
+            <!-- QUICK ACTIONS -->
+            <div class="quick-actions">
+                <button class="action-card" onclick="showPage('challenges')">
+                    <span>🧩</span>
+                    <h3>Practice Challenges</h3>
+                    <p>Explore coding problems</p>
+                </button>
+
+                <button class="action-card" onclick="showPage('assessments')">
+                    <span>📝</span>
+                    <h3>Assessments</h3>
+                    <p>Test your knowledge</p>
+                </button>
+
+                <button class="action-card" onclick="openProgress()">
+                    <span>📊</span>
+                    <h3>My Progress</h3>
+                    <p>View your achievements</p>
+                </button>
+
+                <button class="action-card" onclick="openHelp()">
+                    <span>❓</span>
+                    <h3>Help Center</h3>
+                    <p>Learn how to use the app</p>
+                </button>
+            </div>
+
+            <div class="bottom-grid">
+
+                <div class="panel">
+                    <h3>Recent Activity</h3>
+
+                    <div class="activity">
+                        <span class="activity-icon">✓</span>
+                        <div>
+                            <strong>Reverse a String</strong>
+                            <p>Completed today</p>
+                        </div>
+                    </div>
+
+                    <div class="activity">
+                        <span class="activity-icon">✓</span>
+                        <div>
+                            <strong>Binary Search</strong>
+                            <p>Completed yesterday</p>
+                        </div>
+                    </div>
+
+                    <div class="activity">
+                        <span class="activity-icon">✓</span>
+                        <div>
+                            <strong>Maximum Subarray</strong>
+                            <p>Completed recently</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>My Team</h3>
+
+                    <div class="team-info">
+                        <div class="team-avatar">🐺</div>
+                        <div>
+                            <h3 id="dashboardTeamName">Binary Beasts</h3>
+                            <p>4 members · Team coding</p>
+                        </div>
+                    </div>
+
+                    <button class="secondary-btn" onclick="showPage('teams')">
+                        View Team
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CHALLENGES -->
+        <section id="challenges" class="page">
+
+            <div class="page-heading">
+                <h1>Daily Challenges 🧩</h1>
+                <p>Practice problems and improve your coding skills.</p>
+            </div>
+
+            <div class="filter-box">
+                <input type="text" id="searchProblem" placeholder="Search problems...">
+
+                <select id="difficultyFilter">
+                    <option value="all">All Difficulties</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="Arrays">Arrays</option>
+                    <option value="Strings">Strings</option>
+                    <option value="Searching">Searching</option>
+                    <option value="Dynamic Programming">Dynamic Programming</option>
+                </select>
+            </div>
+
+            <div id="problemList" class="problem-list"></div>
+
+        </section>
+
+        <!-- WORKSPACE -->
+        <section id="workspace" class="page">
+
+            <div class="page-heading">
+                <h1>Code Workspace 💻</h1>
+                <p>Write your code and check sample test cases.</p>
+            </div>
+
+            <div class="workspace">
+
+                <div class="problem-description">
+
+                    <span class="tag green">Easy</span>
+                    <h2 id="workspaceTitle">Two Sum Variant</h2>
+
+                    <p id="workspaceDescription">
+                        Find two elements whose sum equals the target.
+                    </p>
+
+                    <h3>Example</h3>
+
+                    <div class="example-box">
+                        <p>Input: [2, 7, 11, 15], target = 9</p>
+                        <p>Output: [0, 1]</p>
+                    </div>
+
+                    <h3>Explanation</h3>
+
+                    <p>
+                        The numbers 2 and 7 add up to 9.
+                        Their positions in the array are 0 and 1.
+                    </p>
+
+                    <h3>Constraints</h3>
+
+                    <ul>
+                        <li>Array contains at least two elements.</li>
+                        <li>Each element is an integer.</li>
+                        <li>There is one valid answer.</li>
+                    </ul>
+
+                    <h3>Sample Test Cases</h3>
+
+                    <div class="example-box">
+                        <p>Test 1: [2,7,11,15], target 9</p>
+                        <p>Expected: [0,1]</p>
+                    </div>
+
+                    <div class="example-box">
+                        <p>Test 2: [3,2,4], target 6</p>
+                        <p>Expected: [1,2]</p>
+                    </div>
+
+                    <button class="secondary-btn" onclick="showPage('challenges')">
+                        ← Back to Challenges
+                    </button>
+
+                </div>
+
+                <div class="editor-panel">
+
+                    <div class="editor-top">
+                        <select id="languageSelect">
+                            <option value="javascript">JavaScript</option>
+                            <option value="python">Python</option>
+                            <option value="java">Java</option>
+                            <option value="c">C</option>
+                        </select>
+
+                        <span>● Code Editor</span>
+                    </div>
+
+                    <textarea id="codeEditor" spellcheck="false"></textarea>
+
+                    <div class="editor-buttons">
+                        <button class="secondary-btn" onclick="resetCode()">Reset</button>
+                        <button class="secondary-btn" onclick="runTests()">▶ Run Tests</button>
+                        <button class="primary-btn" onclick="submitCode()">Submit</button>
+                    </div>
+
+                    <div id="testResults" class="test-results">
+                        <h3>Test Results</h3>
+                        <p>Run your code to see test results.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- TEAMS -->
+        <section id="teams" class="page">
+
+            <div class="page-heading">
+                <h1>My Team 👥</h1>
+                <p>Practice together and improve your team score.</p>
+            </div>
+
+            <div class="team-main-card">
+                <div class="team-avatar big">🐺</div>
+                <h2 id="teamPageName">Binary Beasts</h2>
+                <p>Team coding squad</p>
+                <h2><span id="teamPagePoints">850</span> XP</h2>
+                <p>4 / 4 members</p>
+            </div>
+
+            <div class="panel">
+                <h2>Team Members</h2>
+
+                <div class="member-list">
+                    <div class="member">
+                        <div class="avatar">S</div>
+                        <div><strong>Student 1</strong><p>Team Leader</p></div>
+                    </div>
+
+                    <div class="member">
+                        <div class="avatar">A</div>
+                        <div><strong>Student 2</strong><p>Member</p></div>
+                    </div>
+
+                    <div class="member">
+                        <div class="avatar">R</div>
+                        <div><strong>Student 3</strong><p>Member</p></div>
+                    </div>
+
+                    <div class="member">
+                        <div class="avatar">K</div>
+                        <div><strong>Student 4</strong><p>Member</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-actions">
+                <button class="primary-btn" onclick="createTeam()">+ Create Team</button>
+                <button class="secondary-btn" onclick="joinTeam()">Join Team</button>
+            </div>
+
+        </section>
+
+        <!-- LEADERBOARD -->
+        <section id="leaderboard" class="page">
+
+            <div class="page-heading">
+                <h1>Team Leaderboard 🏆</h1>
+                <p>See which teams are leading today's contest.</p>
+            </div>
+
+            <div class="panel">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Team</th>
+                            <th>Problems Solved</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="leaderboardBody"></tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <!-- STREAK -->
+        <section id="streak" class="page">
+
+            <div class="page-heading">
+                <h1>My Coding Streak 📅</h1>
+                <p>Small daily practice makes a big difference.</p>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <p>Current Streak</p>
+                    <h2>🔥 6 Days</h2>
+                </div>
+
+                <div class="stat-card">
+                    <p>Longest Streak</p>
+                    <h2>12 Days</h2>
+                </div>
+
+                <div class="stat-card">
+                    <p>Total Solved</p>
+                    <h2 id="streakSolved">12</h2>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Activity Calendar</h2>
+                <p class="small-text">Your coding activity over the last few weeks</p>
+
+                <div id="calendar" class="calendar"></div>
+
+                <div class="calendar-legend">
+                    <span>Less</span>
+                    <span class="square s1"></span>
+                    <span class="square s2"></span>
+                    <span class="square s3"></span>
+                    <span class="square s4"></span>
+                    <span>More</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ASSESSMENTS -->
+        <section id="assessments" class="page">
+
+            <div class="page-heading">
+                <h1>Assessments 📝</h1>
+                <p>Test your programming knowledge and logical thinking.</p>
+            </div>
+
+            <div class="problem-list">
+
+                <div class="problem-card">
+                    <span class="tag green">Easy</span>
+                    <h3>Python Basics</h3>
+                    <p>Test your knowledge of variables, loops and conditions.</p>
+                    <button class="primary-btn" onclick="openAssessment('Python Basics')">
+                        Start Assessment
+                    </button>
+                </div>
+
+                <div class="problem-card">
+                    <span class="tag purple">Medium</span>
+                    <h3>Data Structures</h3>
+                    <p>Practice arrays, strings and searching concepts.</p>
+                    <button class="primary-btn" onclick="openAssessment('Data Structures')">
+                        Start Assessment
+                    </button>
+                </div>
+
+                <div class="problem-card">
+                    <span class="tag purple">Medium</span>
+                    <h3>Logical Thinking</h3>
+                    <p>Improve your logical and problem-solving skills.</p>
+                    <button class="primary-btn" onclick="openAssessment('Logical Thinking')">
+                        Start Assessment
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
